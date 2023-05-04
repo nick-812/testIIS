@@ -15,6 +15,8 @@ from evidently.tests import *
 df = pd.read_csv("data/processed/current_data.csv", sep=",", header=0)
 df1 = pd.read_csv("data/processed/reference_data.csv", sep=",", header=0)
 
-report = Report(metrics=[DataDriftPreset()])
-report.run(current_data=df, reference_data=df1, column_mapping=None)
-report.save_html("reports/report.html")
+data_integrity_dataset_tests = TestSuite(tests=[TestColumnsType(), TestNumberOfDriftedColumns()])
+data_integrity_dataset_tests.run(reference_data=df1, current_data=df)
+data_integrity_dataset_tests.save_html("reports/stability.html")
+
+
