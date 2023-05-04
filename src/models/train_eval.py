@@ -7,7 +7,7 @@ from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
-
+from pickle import dump
 from sklearn.metrics import explained_variance_score
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
@@ -42,3 +42,5 @@ mse=mean_squared_error(y_test, y_out)
 evs=explained_variance_score(y_test, y_out)
 
 print(mae)
+
+dump(gsModel, open('models/model.pkl', 'wb'))
