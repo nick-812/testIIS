@@ -6,7 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, Normalizer
 from pickle import dump
 from sklearn.metrics import explained_variance_score
 from sklearn.metrics import mean_squared_error
@@ -17,6 +17,7 @@ df = pd.read_csv("data/processed/current_data.csv", sep=",", header=0)
 cevovod = Pipeline ([
     ("encoder", OneHotEncoder(handle_unknown='ignore', sparse=False)),
     ("preprocess", SimpleImputer(missing_values=np.nan, strategy='mean')),
+    ('normalization_step', Normalizer()),
     ('scaler',StandardScaler()),
     ("MLPR", MLPRegressor())
 ])
